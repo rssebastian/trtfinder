@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/trtfinder/static/css/main.c1fbaeff.css",
+    "main.js": "/trtfinder/static/js/main.eaea596f.js",
+    "index.html": "/trtfinder/index.html",
+    "main.c1fbaeff.css.map": "/trtfinder/static/css/main.c1fbaeff.css.map",
+    "main.eaea596f.js.map": "/trtfinder/static/js/main.eaea596f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c1fbaeff.css",
+    "static/js/main.eaea596f.js"
+  ]
+}
