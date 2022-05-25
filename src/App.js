@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import ClinicsContext from './store/clinics-context';
 import './App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,29 +9,14 @@ import List from './components/List';
 import axios from 'axios';
 
 function App() {
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   axios
-  //     .get('https://trtfinder-6f7e0-default-rtdb.firebaseio.com/')
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setIsLoading(false);
-  //       setData(data);
-  //     });
-  // }, []);
-
+  const clinicsCtx = useContext(ClinicsContext);
   return (
     <Container>
       <Row>
         <h1>Fin Vs Fin Coding Challenge</h1>
       </Row>
       <Row>
-        <Map />
+        <Map clinics={clinicsCtx} />
       </Row>
     </Container>
   );
