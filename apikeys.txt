@@ -1,3 +1,0 @@
-Google Geocoder API Key
-sebastiansryan: AIzaSyDJfFlKJSUQufk7L6cqm0xzNY5nYzoj5nE
-iisryansebastian: AIzaSyBoQPPRmYzGkwgRvzwDgvChPcFo_6sRY_A
