@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/trtfinder/static/css/main.c1fbaeff.css",
-    "main.js": "/trtfinder/static/js/main.eaea596f.js",
+    "main.js": "/trtfinder/static/js/main.104c96de.js",
     "index.html": "/trtfinder/index.html",
     "main.c1fbaeff.css.map": "/trtfinder/static/css/main.c1fbaeff.css.map",
-    "main.eaea596f.js.map": "/trtfinder/static/js/main.eaea596f.js.map"
+    "main.104c96de.js.map": "/trtfinder/static/js/main.104c96de.js.map"
   },
   "entrypoints": [
     "static/css/main.c1fbaeff.css",
-    "static/js/main.eaea596f.js"
+    "static/js/main.104c96de.js"
   ]
 }
