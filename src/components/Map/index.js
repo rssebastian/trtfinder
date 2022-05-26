@@ -1,15 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from '@react-google-maps/api';
 import Geocode from 'react-geocode';
-Geocode.setApiKey('AIzaSyBoQPPRmYzGkwgRvzwDgvChPcFo_6sRY_A');
 
+Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 const Map = (props) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBoQPPRmYzGkwgRvzwDgvChPcFo_6sRY_A',
+    googleMapsApiKey: process.env.REACT_APP_API_KEY,
   });
 
   const [coordinates, setCoordinates] = useState();
+  const [currentClinic, setCurrentClinic] = useState(null);
   const [isBusy, setBusy] = useState(true);
 
   useEffect(() => {
@@ -20,15 +25,13 @@ const Map = (props) => {
         clinicCoordinates.push(clinicPromise.results[0].geometry.location);
       }
     };
-    console.log(props.clinics.clinics);
-    getCoordinates(props.clinics.clinics).then(() => {
+    getCoordinates(props.clinics).then(() => {
       setCoordinates(clinicCoordinates);
       setBusy(false);
     });
-    console.log(clinicCoordinates);
-  }, [props.clinics.clinics]);
+  }, [props.clinics]);
 
-  const center = useMemo(() => ({ lat: 34, lng: -118 }), []);
+  const center = useMemo(() => ({ lat: 34.06656545, lng: -118.42574034 }), []);
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -38,16 +41,41 @@ const Map = (props) => {
         <h1>"Loading..."</h1>
       ) : (
         <GoogleMap
-          zoom={10}
+          zoom={11}
           center={center}
           mapContainerClassName='map-container'
         >
-          {console.log(coordinates)}
           {coordinates &&
-            coordinates.map((coordinate) => {
-              console.log(coordinate);
-              return <Marker key={coordinate.lat} position={coordinate} />;
+            coordinates.map((coordinate, index) => {
+              return (
+                <Marker
+                  key={index}
+                  position={coordinate}
+                  onClick={() => setCurrentClinic(index)}
+                />
+              );
             })}
+          {currentClinic != null && (
+            <InfoWindow
+              position={coordinates[currentClinic]}
+              onCloseClick={() => setCurrentClinic(null)}
+            >
+              <div>
+                <h6>{props.clinics[currentClinic].Name}</h6>
+                <p>Address: {props.clinics[currentClinic].Address}</p>
+                <p>Phone Number: {props.clinics[currentClinic].Phone}</p>
+                <p>Website: {props.clinics[currentClinic].Website}</p>
+                <p>
+                  Google Rating (out of 5):{' '}
+                  {props.clinics[currentClinic]['Google Rating (out of 5)']}
+                </p>
+                <p>
+                  Number of reviews:{' '}
+                  {props.clinics[currentClinic]['Number of reviews']}
+                </p>
+              </div>
+            </InfoWindow>
+          )}
         </GoogleMap>
       )}
     </>
